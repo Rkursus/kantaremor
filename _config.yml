@@ -1,0 +1,23 @@
+# Permalinks
+#permalink:        pretty
+
+# Theme
+theme:            jekyll-theme-minimal
+
+# Setup
+title:            "KANTAR Emor - R jätkukoolitus (2021 Aprill)"
+tagline:          R jätkukoolitus
+url:              http://rkursus.github.io/
+paginate:         1
+baseurl:          /kantaremor
+author:
+  name:           Kaur Lumiste
+  url:            
+  email:          kaur.lumiste@ut.ee
+
+# Custom vars
+version:          1.0.0
+github:
+  repo:           http://rkursus.github.io/kantaremor
+
+  
