@@ -5,8 +5,8 @@
 theme:            jekyll-theme-minimal
 
 # Setup
-title:            "KANTAR Emor - R jätkukoolitus (2021 Aprill)"
-tagline:          R jätkukoolitus
+title:            "KANTAR Emor"
+tagline:          R jätkukoolitus (2021 Aprill)
 url:              http://rkursus.github.io/
 paginate:         1
 baseurl:          /kantaremor
