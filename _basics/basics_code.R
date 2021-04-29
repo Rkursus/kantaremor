@@ -12,37 +12,22 @@
 # Kust saab ülevaate hetkel R-i mälus toimuvast?
 # Kuhu saab otsida abi? Kuhu ilmuvad pildid?
 
-# --- 1.2 Mõned tehted ----
-4 * 6
-3 + 5  + (23 - 67)*4
-4 * (1:40)
-5*6 ; 7 + 8  # kaks käsku ühel rael eraldada semikooloniga
 
-
-# --- Näited alapunktist: Lihtsam aritmeetika
-1 + (2 - 3) * 4/5
-2 ^ 3 - 2 ** 3
-5 %% 3
-log(exp(1)) * cos(-pi) * sqrt(9) + factorial(4) - choose(4, 2) * min(4, 5, 2)
-
-## --- ÜL 1.2.1 KMI arvutamine ----
-
-
-
-
-
-# --- 1.3 Käsud ja abi saamine ----
-choose(4, 2)
-choose(n = 4, k = 2)  
-choose(k = 2, n = 4)
-choose(2, 4)   # kui argumentide nimesid mitte kasutada, siis on oluline argumentide järjekord
+# --- 1.1 Käsud ja abi saamine ----
+runif(4)
+runif(n = 4, max = 2)  
+runif(n = 4, min = -2)
+runif(n = 4, min = -2, max = 2) 
+runif(max = 2, n = 4)
+runif(2, 4)   # kui argumentide nimesid mitte kasutada, siis on oluline argumentide järjekord
 
 # käskudel võivad olla vaikimisi väärtustega argumente
 log(5)            # funktsioonil on vaikimisi määratud logaritmi alus 2.718...(Euleri arv), leitakse naturaallogaritm
 log(8, base = 2)  # kui vaja leida logaritm alusel 2, peab argumendi 'base' väärtust muutma
 
 
-?choose
+?runif
+?log
 
 # NB!  R teeb vahet suurtel ja väiksetel tähtedel, proovi:
 Log(5)
@@ -53,19 +38,7 @@ log(8, base = 2)
 
 
 
-# --- 2. Muutujad ----
-
-# --- 2.1 väärtuse omistamine muutujale ----
-kaal <- 80  
-pikkus <- 1.72
-
-kaal # muutuja väärtuse vaatamine
-
-kaal/pikkus ^ 2  # muutujate kasutamine tehtes
-
-
-
-# --- 3. Lisapakettide kasutamine ----
+# --- 2. Lisapakettide kasutamine ----
 
 # Paigaldame lisapaketi ggplot2 ja talle vajalikud paketid:
 install.packages("ggplot2")
@@ -75,9 +48,24 @@ install.packages("ggplot2")
 library(ggplot2)
 
 
-# --- 2.2 Vektorid ----
-kaalud <- c(7, 3.5, 0.4, 2, 3.2, 20.2)
-liik <- c("koer", "kass", "rott", "kass", "kass", "koer")
+
+# --- 3. Muutujad ----
+
+# --- 3.1 väärtuse omistamine muutujale ----
+kaal <- 80  
+pikkus <- 1.72
+
+kaal # muutuja väärtuse vaatamine
+
+kaal/pikkus ^ 2  # muutujate kasutamine tehtes
+
+
+
+
+
+# --- 3.2 Vektorid ----
+kaalud <- c(73, 85, 92.3, 62, 103.2, 70.2)
+nimed <- c("Liisa", "Margus", "Mati", "Maria", "Tauno", "Heleri")
 
 
 # vektori elemendid peavad olema sama tüüpi, arve ja teksti miksides saame tulemuseks tekstivektori
@@ -88,7 +76,7 @@ c(987, -Inf, "tekst", kaalud)*3  #  aga tekstidega ei saa arvutusi teha
 
 
 
-# kindla mustriga vektorite moodustamine
+# Kindla mustriga vektorite moodustamine
 
 # jada täisarvudest sammuga 1, kasvav või kahanev
 1:5 
@@ -126,24 +114,20 @@ kaalud[seq(1, 6, 2)]  # iga teine element alates esimesest
 
 
 
-# ---- Ül 2.2.1 ----
+# ---- Ül 3.2.1 ----
 # 1
-y <- rep(____)
+y <- ____
 y
 
 # 2
 z <- ____
 z
-y + z
+y + z # kontrollimiseks, kas kõik vektori väärtused on 12
 
 # 3 
 length(z) # mitu elementi on vektoris z? 
 z[___] 
 
-#4  Tehte järjekord! 
-u <- 8
-1:u - 1 
-1:(u - 1)
 
 
 
@@ -151,7 +135,8 @@ u <- 8
 
 
 
-# --- 2.3 Puuduvad väärtused ----
+
+# --- 3.3 Puuduvad väärtused ----
 vanused <- c(7,  , 3, 53, 53, 95) # veateade: vektorisse ei saa jätta täitmata kohta
 
 
@@ -172,13 +157,13 @@ table(vanused)
 table(vanused)
 table(vanused, useNA = "ifany")
 table(vanused, useNA = "always")
-table(liik, useNA = "always")
+table(nimed, useNA = "always")
 
 summary(vanused)
 
 
 
-# ---- ÜL 2.3.1 ----
+# ---- ÜL 3.3.1 ----
 #1 
 sum(____)
 

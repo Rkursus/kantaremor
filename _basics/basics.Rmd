@@ -21,35 +21,38 @@ hook2 <- function(x){ gsub("```\n+```\n", "", x) }
 
 # RStudio ja kasutajaliides
 
-Ava Start-menüü ja otsi programm nimega RStudio, käivita see.
+Leia oma arvutis programm RStudio, kui sa pole seda veel paigaldanud, siis saad selle tasuta alla laadida [RStudio kodulehelt](https://rstudio.com/products/rstudio/download/#download).
+
+ **NB!** RStudio pole ainus R-i kasutajaliides, on veel palju teisi aga pidime valima ühe aga pea kõik kursusel käsitletav on tehtav igas teises R-i kasutajaliideses.
 
 ![](rstudio.png)
 
-Avanenud programmiaken jaguneb neljaks. Akende paigutust saab oma suva järgi muuta, kuid esialgu paiknevad paremal aknad, mis annavad ülevaate kasutatavatest kaustadest, defineeritud muutujatest, graafikutest jne ning vasakul on R-i konsool ja tekstiredaktor käskude kirjapanekuks;
+Teeme tutvust RStudio-ga:
 
+* Avanenud programmiaken jaguneb üldiselt neljaks. Akende paigutust saab oma suva järgi muuta, kuid esialgu paiknevad paremal aknad, mis annavad ülevaate kasutatavatest kaustadest, defineeritud muutujatest, graafikutest jne ning vasakul on R-i konsool ja tekstiredaktor käskude kirjapanekuks;
 * R konsool
     - alumine vasakpoolne aken on programmi R konsooliaknen, kuhu saab programmi käsud kirjutada viiba `>` järele;
     -	käsk täidetakse pärast `Enter`-klahvi vajutamist;
     -	varem sisestatud käske saab tagasi sirvida nooleklahviga $\uparrow$;
     -	plussmärk `+` rea ees näitab, et käsk on pooleli.
-    - kui midagi läks valesti ja R ei hakka tegema seda, mida soovid, siis vajuta `Esc` klahvi.
-* Tekstiredaktor ehk skriptiaken
+* Tekstiredaktor
     - tekstiredaktorisse saate kirjutada R-i käsud/koodi ja kommentaarid;
     - käsufaili ühel real peab olema kirjutatud üks käsk (reavahetus näitab programmile käsu lõppu), kui soovid ühele reale kirjutada mitu käsku, siis need tuleb eraldada semikooloniga `;`
     - kommentaari lisamiseks tuleb vastava rea algusess lisada `#`-märk;
     - mingi koodilõigu käivitamiseks tuleb see hiirega ära valida ning vajutada klahvikombinatsiooni `Ctrl+Enter`.
 
+![](rstudio2.png)
 
-\pagebreak
-Sriptiaknas on mõislik käskudele lisada kommentaare, et teinekord või teisel inimesel oleks koodi lihtsam lugeda. **Kommentaare** saab R-i koodis lisada ainult rea lõppu, kasutades trellide-sümbolit:
+Konsooli käskude sisestamise asemel on neid mõistlik kirjutada skriptifaili, et hiljem (nt järgmisel päeval) saaks tehtud tööd (näiteks mingi analüüsi) kiiresti jätkata või uuesti teha kui on lisandunud uued andmed. Skriptifaili tekitamiseks R-is tuleks valida menüüst `File` valik `New script`. Avatakse skriptiaken, kuhu saab käske kirjutada. Kui skriptiaknas olles vajutada klahve `Ctrl+Enter`, siis vastaval real olev käsk saadetakse R-ile täitmiseks. Kui käsk on kirjutatud mitmel real või on soov mitut käsku järjest jooksutada, võib vastavad read skriptiaknas hiirega ära märkida ning seejärel `Ctrl+Enter` vajutada. Valides menüüst `File` valiku `Save`, salvestatakse `.R` lõpuga skriptifail kasutaja poolt määratud asukohta.
 
-```{r,eval=TRUE}
+Sriptiaknas on mõislik käskudele lisada kommentaare, et teinekord (või teisel inimesel) oleks koodi lihtsam lugeda. **Kommentaare** saab R-i koodis lisada ainult rea lõppu, kasutades trellide-sümbolit:
+
+```{r funktsTest, eval=TRUE, exercise = TRUE}
 log(5.9)  # võtame naturaallogaritmi arvust 5,9
 # terve see rida on kommentaar, sest rea alguses on # ehk trellide sümbol
 ```
 
-
-
+Pane tähele, et **kümnendmurru eraldamiseks** kasutatakse R-is punkti, mitte koma.
 
 
 ## Käsud ja abi saamine
@@ -68,7 +71,7 @@ Osadel käskudel on mõnedele argumentidele antud  niinimetatud vaikimisi väär
 log(8, base = 2)
 ```
 
-Kui mingi konkreetse käsu kohta soovitakse abi saada (näiteks kontrollida, mis on käsu argumentide nimed ja millises järjekorras need tuleks ette anda), võib abi otsida RStudio abiaknast (paremal all, `Help` vahelehel).
+Kui mingi konkreetse käsu kohta soovitakse abi saada (näiteks kontrollida, mis on käsu argumentide nimed ja millises järjekorras need tuleks ette anda), võib abi otsida RStudio abiaknast (paremal all, `Help` vahelehel). Lisaks võib otsida ka märksõnu ja RStudio pakub välja käskusid, mis sellele märksõnale vastavad (**NB!** käsud esitatakse stiilis `<pakett>::<käsk>`, nt `dplyr::select`. Pakettideni jõuame hiljem).
  
 
 Tasub tähele panna, et R on (nagu suurem osa programmeerimiskeeli) **tõstutundlik** -- see tähendab, et programm eristab suuri ja väikeseid tähti. Kui ajada käsu või argumendi nimes mõni suur- ja väiketäht segi, siis on tulemuseks veateade:
@@ -76,6 +79,33 @@ Tasub tähele panna, et R on (nagu suurem osa programmeerimiskeeli) **tõstutund
 Log(5)
 log(8, BASE = 2)
 ```
+
+
+### Ülesanded
+
+1. Uuri välja, kuidas töötab käsk `sample`. Mis on selle argumendid?
+1. Uuri välja, mida teeb käsk `rnorm`.
+1. Leia funktsioon, mis arvutaks kumulatiivse summa.
+
+
+# Lisapakettide kasutamine
+
+Üks R-i populaarseks muutumise põhjuseid on rikkalik lisapakkettide olemasolu. Tõenäoliselt leidub iga praktilise statistika-alase (ja ka mõne muu valdkonna) probleemi jaoks omaette pakett (*package*). Siinkohal vaatame aga jooniste tegemise paketi `ggplot2`.
+
+Lisapaketid ei ole tavaliselt R-iga kaasas, vaid need tuleb paigaldada. Kui paigaldatav pakett vajab omakorda mingeid muid pakette, siis paigaldatakse ka need.
+
+Paigaldame lisapaketi `ggplot2` ja talle vajalikud paketid (**NB!** jutumärgid):
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+Kui pakett on paigaldatud, siis järgmisel töösessioonil seda enam uuesti paigaldama ei pea. Küll aga tuleb arvutisse paigaldatud paketid igal uuel R-i sessioonil sisse laadida käsuga `library` (või `require`), mille argumendiks on laaditava paketi nimi:
+```{r, eval = FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+
+
 
 # Muutujatega töötamine
 
@@ -101,29 +131,13 @@ Siit maksab tähele panna ka seda, et muutujale uut väärtust omistades kirjuta
 
 Töökeskkonnas olevatest objektidest saab ülevaate aknast `Environment` (paremal üleval).
 
-# Lisapakettide kasutamine
-
-Üks R-i populaarseks muutumise põhjuseid on rikkalik lisapakkettide olemasolu. Tõenäoliselt leidub iga praktilise statistika-alase (ja ka mõne muu valdkonna) probleemi jaoks omaette pakett (*package*). Siinkohal vaatame aga jooniste tegemise paketi `ggplot2`.
-
-Lisapaketid ei ole tavaliselt R-iga kaasas, vaid need tuleb paigaldada. Kui paigaldatav pakett vajab omakorda mingeid muid pakette, siis paigaldatakse ka need.
-
-Paigaldame lisapaketi `ggplot2` ja talle vajalikud paketid:
-```{r, eval=FALSE}
-install.packages("ggplot2")
-```
-
-Kui pakett on paigaldatud, siis järgmisel töösessioonil seda enam uuesti paigaldama ei pea. Küll aga tuleb arvutisse paigaldatud paketid igal uuel R-i sessioonil sisse laadida käsuga `library` (või `require`), mille argumendiks on laaditava paketi nimi:
-```{r, results='hide', warning=FALSE}
-library(ggplot2)
-```
-
 
 ## Vektorid. Tehted vektoritega
-<!--Eelpool andsime andmestikust mitme veeru (või rea) korraga eraldamiseks vajalikud veeru (rea) numbrid ette käsuga `c(.)`.-->
-Eelmises punktis vaatasime juhtu, muutujate väärtuseks oli üks arv. Objekti võib aga moodustada ka mitmest väärtusest, näiteks omistame kuue uuritava kaalud muutujale nimega `kaalud` ja muutujale `liik` uuritavate liigid:
+
+Eelmises punktis vaatasime juhtu, muutujate väärtuseks oli üks arv. Objekti võib aga moodustada ka mitmest väärtusest, näiteks omistame kuue uuritava kaalud muutujale nimega `kaalud` ja muutujale `nimed` uuritavate nimed:
 ```{r}
-kaalud <- c(7, 3.5, 0.4, 2, 3.2, 20.2)
-liik <- c("koer", "kass", "rott", "kass", "kass", "koer")
+kaalud <- c(73, 85, 92.3, 62, 103.2, 70.2)
+nimed <- c("Liisa", "Margus", "Mati", "Maria", "Tauno", "Heleri")
 ```
 Funktsiooni `c(.)` korral on tegemist käsuga, mis sellele antud argumendid kombineerib (*combine*) kokku üheks vektoriks (järjendiks). Kui kombineeritakse erinevat tüüpi väärtuseid (näiteks teksti ja arve), siis muudetakse kõik väärtused selliseks, mis võimaldab võimalikult palju infot säilitada -- kõik vektori elemendid peavad olema sama tüüpi.
 ```{r}
@@ -138,9 +152,6 @@ seq(from=0, to=11, by=2) #arvud 0, 0+2, 0+2+2, ..., kuni jõutakse väärtuseni 
 seq(0, 1, 0.1) # saab ka komaga arvudest järjendeid teha
 seq(0, 1, length.out=4)  
 rep(x=c(1, 3), times=2)  # vektorit korratakse 2 korda
-```
-\pagebreak
-```{r}
 rep(x=c(1, 3), each=2)   # vektori iga elementi korratakse 2 korda
 ```
 
@@ -164,11 +175,10 @@ kaalud[seq(1, 6, 2)] # iga teine element alates esimesest
 
 
 
-###Ülesanded
-1. Moodusta vektor nimega `y`, mille väärtuseks oleks arvud `1 1 1  2 2 2 2  3 3 3 3 3` kasutades käsku `rep`.
-1. Leia vektor `z`, mille liitmisel `y`-le on tulemuseks vektor, mille kõik koordinaadid on võrdsed `7`.
-1. Vali eelnevast vektorist välja iga kolmas väärtus, kasutades kantsulge ja sobivat indeksite vektorit.
-1. Omista muutujale `u` väärtus 8. Proovi läbi käsud `1:u - 1` ja `1:(u-1) `. Milles on erinevus?
+### Ülesanded
+1. Moodusta vektor nimega `y`, mille väärtuseks oleks arvud `1 2 3 4 5 6 7 8 9`.
+1. Leia vektor `z`, mille liitmisel `y`-le on tulemuseks vektor, mille kõik koordinaadid on võrdsed `12`.
+1. Vali eelnevast vektorist `z` välja iga teine väärtus, kasutades kantsulge ja sobivat indeksite vektorit.
 
 
 
@@ -176,10 +186,11 @@ kaalud[seq(1, 6, 2)] # iga teine element alates esimesest
 
 
 ## Puuduvad väärtused
+
 Andmete kogumisel võib juhtuda, et kõigil uuritavatel ei õnnestu vajalikke mõõtmisi teha ja andmetesse tekivad lüngad. Puuduva väärtuse tähistamiseks on R-is tähekombinatsioon `NA` (*Not Available*). Oletame, et analüüsil on vaja teada ka uuritavate vanust, teise vaatlusaluse kohta pole aga see teada:
 <!-- kuudes vanus-->
 ```{r}
-vanused <- c(7, NA, 3, 53, 53, 95)
+vanused <- c(37, NA, 23, 53, 53, 45)
 vanused
 ```
 Kui teha arvutusi puuduva väärtusega, siis tulemuseks on samuti puuduv väärtus. Proovi:
@@ -194,7 +205,7 @@ mean(vanused) # keskmine vanus, kui kaasta NA väärtus on NA
 mean(vanused, na.rm = TRUE) # keskmine vanus, kui NA väärtus on eemaldatud
 table(vanused) # vanuste sagedustabel, NA väärtust ei esitata
 table(vanused, useNA = "ifany") # lisame sagedustabelisse ka puuduva väärtuse, kui esineb
-table(liik, useNA = "always") # lisame sagedustabelisse ka puuduva väärtuse, alati
+table(nimed, useNA = "always") # lisame sagedustabelisse ka puuduva väärtuse, alati
 summary(vanused) # NA väärtuste arv tuuakse vaikimisi välja
 ```
 
