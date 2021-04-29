@@ -26,7 +26,9 @@ R-i kodulehelt saab vajaliku tarkvara alla laadida: http://www.r-project.org/
 * [R-i põhitõed osa 2](r_basics2)
 	* [R kood](https://raw.githubusercontent.com/Rkursus/kantaremor/main/_basics/basics2_kood.R)
 * [Paketiga `dplyr` andmestike muutmine](dplyr)
+	* [R kood](https://raw.githubusercontent.com/Rkursus/kantaremor/main/_tidyverse/dplyr_minimal_kood.R)
 * [Paketiga `tidyr` andmestike muundamine](tidyr)
+	* [R kood](https://raw.githubusercontent.com/Rkursus/kantaremor/main/_tidyverse/tidyr_minimal_kood.R)
 * [Lisamaterjali](lisamaterjal)
 
 
