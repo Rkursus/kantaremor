@@ -1,11 +1,11 @@
 ---
-title: "tidyr"
+title: "Tidyderse - `tidyr` näide"
 output: 
   html_document:
     theme: null
 ---
 
-`tidyr` on Hadley Wickhami kirjutatud R-i pakett, mis aitab laias formaadis andmetabelit transformeerida pikas formaadis andmestikuks ja vastupidi.
+Pakett `tidyr` on Hadley Wickhami kirjutatud R-i pakett, mis tuleb kaasa paketiga `tidyverse`. See pakett aitab laias formaadis andmetabelit transformeerida pikas formaadis andmestikuks ja vastupidi.
 
 ![](lai_ja_pikk.png "Näide")
 

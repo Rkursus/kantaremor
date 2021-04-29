@@ -15,6 +15,7 @@ E-raamatud:
 * [R Graphics Cookbook (Winston Chang)](https://r-graphics.org/)
 * [Hands-On Programming with R (G. Grolemund)](https://rstudio-education.github.io/hopr/)
 * [R Markdown: The Definitive Guide (Y. Xie, J. J. Allaire, G. Grolemund)](https://bookdown.org/yihui/rmarkdown/)
+* [ggplot2: Elegant Graphics for Data Analysis (H. Wickham)](https://ggplot2-book.org/index.html)
 
 ## Andmeteadus
 
@@ -33,7 +34,7 @@ E-raamatud:
 
 ## Veel kasulikke linke:
 
-* [LTMS.00.016 Rakendustarkvara: R](https://rkursus.github.io/sygis2019) - Eestikeelne R kursus.
 * Hulk [RStudio soovitatud raamatuid](https://rstudio.com/resources/books/) (mitmed tasuta _online_ versioonidega).
 * [R-bloggers](https://www.r-bloggers.com/) - Blogi huvitavatest R-i rakendustest.
 * [Simply Statistics](https://simplystatistics.org/) - Huvitav R-i blogi.
+

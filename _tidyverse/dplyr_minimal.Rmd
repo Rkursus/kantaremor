@@ -1,22 +1,22 @@
 ---
-title: "dplyr minimalistlikud näited"
+title: "Tidyderse - `dplyr` minimalistlikud näited"
 output: 
   html_document:
     theme: null
 ---
 
-Andmetabelist info kättesaamiseks kasutame R-i paketti *dplyr*. See pakett muudab mugavaks ja kiireks sageli ettetulevad operatsioonid nagu andmestiku filtreerimise, sorteerimise ja grupeerimise. Paketi süntaks omab mitmeidki ühisjooni SQL süntaksi või suuremahuliste andmete töötlemise keelega Pig Latin.
+Andmetabelist info kättesaamiseks kasutame R-i paketti *dplyr*, mis tuleb kaasa paketiga `tidyverse`. See pakett muudab mugavaks ja kiireks sageli ettetulevad operatsioonid nagu andmestiku filtreerimise, sorteerimise ja grupeerimise. Paketi süntaks omab mitmeidki ühisjooni SQL süntaksi või suuremahuliste andmete töötlemise keelega Pig Latin.
 
 Esmakordsel kasutamisel tuleb pakett installeerida. 
 
 ```{r, eval=FALSE}
-install.packages("dplyr")
+install.packages("tidyverse")
 ```
 
 Kui pakett on installeeritud, tuleb kasutamiseks see laadida käsuga
 
 ```{r, eval=FALSE}
-library(dplyr)
+library(tidyverse)
 ```
 
 

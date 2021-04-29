@@ -10,7 +10,7 @@ output:
 
 
 
-# Väärtuste tüübid. 
+# Väärtuste tüübid
 
 Nagu eelmises peatükis öeldud, siis vektori väärtused peavad olema kõik ühte tüüpi. R-is on väärtuste põhitüübid:
 
@@ -24,6 +24,8 @@ Nagu eelmises peatükis öeldud, siis vektori väärtused peavad olema kõik üh
 Üht tüüpi väärtust saab  vahel teisendada teist tüüpi väärtuseks vastava `as.<tüübi_nimi>` käsuga (`as.integer`, `as.numeric`, `as.character` jne). Kontrollimaks mingi väärtuse tüüpi saab kasutada vastavat käsku `is.<tüübi_nimi>` (`is.integer`, `is.numeric`, `is.character` jne).
 
 
+## Väärtuste tüübi kontroll ja muutmine
+
 Eelmises peatükis moodustasime mõned vektorid.
 ```{r}
 kaalud <- c(73, 85, 92.3, 62, 103.2, 70.2)
@@ -34,7 +36,7 @@ ja kontrollime nende väärtuste tüüpe:
 ```{r} 
 is.integer(kaalud)
 is.numeric(kaalud)
-class(liik)
+class(nimed)
 class(vanused)
 ```
 Eraldi käsk on ka puuduvate väärtuste esinemise kontrolliks:
@@ -192,7 +194,7 @@ MS Exceli faile ning statistikatarkvarade spetsiifilisi andmeformaate (nt Stata 
 
 
 
-## Töökataloogi seadistamine
+## Töökausta seadistamine
 
 Andmestike importimisel ja tulemuste väljastamisel on hea toimetada ühes ja samas kaustas - nn **töökaustas**. Käsu `setwd` abil saab määrata, milline on käimasoleva töösessiooni töökaust, ja kui andmefail on selles kataloogis, siis piisab nt käsule `read.table` faili nime etteandmisest (täispikka asukohta ei pea andma). 
 
@@ -213,18 +215,8 @@ write.csv2(näide1, "failinimi.txt", row.names = F)
 
 ## Esmase ülevaate saamine andmetabelist
 
-Käsuga `read.table(.)` sisse loetud andmestik on erilist tüüpi, **`data.frame`**-tüüpi objekt. Andmestikust saab kiire ülevaate järgmiste käskudega:
+Sisse loetud andmestik on erilist tüüpi, **`data.frame`**-tüüpi objekt. Andmestikust saab kiire ülevaate järgmiste käskudega:
 
-<!--
---------------- | ---------------
-`nrow(andmed)`  | mitu rida on andmestikus
-`ncol(andmed)`  | mitu veergu on andmestikus
-`dim(andmed)`   | mitu rida ja mitu veergu on andmestikus
-`str(andmed)`   | andmestiku struktuur: mis tüüpi iga tunnus on ja millised on mõned esimesed väärtused
-`summary(andmed)` | lühike kirjeldav statistika iga tunnuse kohta
-`names(andmed)` | veergude nimed
-`head(andmed)`  | andmestiku mõned esimesed read
--->
 
 ---------------   -----   ------------------------------------------------------------------------------------------------
 `nrow(andmed)`      -     mitu rida on andmestikus
@@ -236,27 +228,29 @@ Käsuga `read.table(.)` sisse loetud andmestik on erilist tüüpi, **`data.frame
 `head(andmed)`      -     andmestiku mõned esimesed read
 ---------------   -----   ------------------------------------------------------------------------------------------------
 
-Käsu `summary(.)` puhul on näha, et mõne tunnuse puhul arvutatakse keskmine, miinimum, maksimum jne, aga teise tunnuse puhul esitatakse sagedused. See, millist kirjeldusviisi kasutatakse, tuleneb tunnuse tüübist. Kui käsuga `str(.)` vaadata, mis on tunnuste tüübid selles andmestikus, on näha kahte tüüpi tunnuseid: `int` ja `chr`. On näha, et `summary(.)` käsk arvutab `int`-tüüpi tunnustele keskmisi jne, `char`-tüüpi tunnustele aga on antud vaatluste arv ja tüübinimi. Kui andmete impordil määrata sõnesid sisaldavad tunnused faktor-tunnusteks (`stringsAsFactors=TRUE`)  siis näitab `summary(.)` käsk sõnelisele tunnusele sagedusi. Faktortüüpi tunnus sarnaneb sõnele (*character*), kuid üheks erinevuseks on näiteks fikseeritud väärtuste hulk. Faktortunnust vaatame järgmises praktikumis ka täpsemalt.
+Impordime ühe andmestiku ja vaatame andmestikust ülevaadet
+```{r, results='hide'}
+load(url("https://github.com/Rkursus/kantaremor/raw/main/data/andmed.RData"))
+summary(andmed)
+str(andmed)
+
+```
+
+Käsu `summary(.)` puhul on näha, et mõne tunnuse puhul arvutatakse keskmine, miinimum, maksimum jne, aga teise tunnuse puhul esitatakse sagedused. See, millist kirjeldusviisi kasutatakse, tuleneb tunnuse tüübist. Kui käsuga `str(.)` vaadata, mis on tunnuste tüübid selles andmestikus, on näha kolme tüüpi tunnuseid: `int`, `num` ja `Factor`. On näha, et `summary(.)` käsk arvutab `int`-tüüpi tunnustele keskmisi jne, `Factor`-tüüpi (ja ka `chr`-tüüpi) tunnustele aga on antud vaatluste arv ja tüübinimi. Faktortüüpi tunnus sarnaneb sõnele (*character*), kuid üheks erinevuseks on näiteks fikseeritud väärtuste hulk.
+
+
+
 
 # Toimingud andmestikuga
 
-Impordime uuesti andmestiku, mida korra kasutasime ka eelmises praktikumis (Massachusettsi andmestik), ja vaatame andmestikust ülevaadet
-```{r, results='hide'}
-andmed <- read.table("https://github.com/Rkursus/2020/raw/master/data/mass.txt", 
-                     header = T, sep = "\t")
-str(andmed)
-```
-
-
-
-
+Jätkame eelmises punktis kasutatud andmestikuga.
 
 ## Veergude ja ridade eraldamine andmestikust: indeksi ja nime järgi
 
 Kui tahame andmestikust ainult üht veergu uurida, siis kõige mugavam on kasutada dollari-sümbolit:
 ```{r, eval=FALSE}
-vanused <- andmed$AGEP
-median(andmed$AGEP)
+vanused <- andmed$vanus
+median(andmed$vanus)
 median(vanused)
 ```
 
@@ -277,24 +271,17 @@ andmed[c(5, 3,  9), ]  # viies, kolmas ja üheksas rida
 
 Tihti on veeruindeksite asemel mugavam kasutada veergude nimesid (peavad olema jutumärkides):
 ```{r,eval=FALSE}
-andmed[, c("AGEP", "WAGP")]  # eraldame veerud "AGEP" ja "WAGP"
-```
-
-Kui andmestikus on ka ridadel nimed, siis saab neid sama moodi kasutada ridade eraldamisel. Selle läbiproovimiseks lisame oma andmestikule praegu ise reanimed:
-```{r,eval=FALSE}
-rownames(andmed) <- paste("rida", rownames(andmed), sep = "-") # paneme ise nimed kujul 'rida-jrk'
-head(andmed[, 5:9])  # vaatame milline on tulemus
-andmed[c("rida-23", "rida-62"), 5:9]  # eraldame read 23 ja 62  
+andmed[, c("vanus", "pikkus")]  # eraldame veerud "vanus" ja "pikkus"
 ```
 
 
-### Uue tunnuse lisamine
 
-Uue tunnuse lisamiseks andmestikku tuleb valida tunnuse nimi, mida andmestikus veel ei esine, ja omistada uuele andmeveerule valitud väärtused. Lisame oma andmestikku näiteks keskmise kuusissetuleku veeru, mis on arvutatud olemasoleva 12 kuu sissetuleku tunnuse `WAGP` abil. Uus tunnus lisatakse viimaseks veeruks andmestikus:
+
+## Uue tunnuse lisamine
+
+Uue tunnuse lisamiseks andmestikku tuleb valida tunnuse nimi, mida andmestikus veel ei esine, ja omistada uuele andmeveerule valitud väärtused. Lisame oma andmestikku näiteks pikkuse teises mõõtühikus, mis on arvutatud olemasoleva pikkuse tunnuse `pikkus` abil. Uus tunnus lisatakse viimaseks veeruks andmestikus:
 ```{r,eval=FALSE}
-andmed$kuusissetulek <- andmed$WAGP/12
-# või
-andmed[, "kuusissetulek"] <- andmed$WAGP/12
+andmed$pikkus_meetrites <- andmed$pikkus/100
 str(andmed)
 ```
 
@@ -303,40 +290,23 @@ str(andmed)
 ## Veergude ja ridade eraldamine andmestikust: tõeväärtusvektori abil
 
 Tõeväärtusvektoreid on väga mugav kasutada nn filtritena. Nimelt on `data.frame` puhul võimalik ridu (ja ka veerge!) eraldada mitte ainult indeksi või -nime järgi, vaid ka tõeväärtusvektori abil. Kui eraldada ridu, siis vastav tõeväärtusvektor peab olema sama pikk kui on andmestikus ridu ning  väärtused selles vektoris näitavad, kas vastavat rida kasutada (`TRUE`) või mitte (`FALSE`). Tõeväärtusvektorite kombineerimisel saab andmestikust väga spetsiifilisi alamhulki eraldada.
+
 ```{r}
-# eraldame kõik read, kus SEX == "Male" ning salvestame selle uueks objektiks
-mehed <- andmed[andmed$SEX == "Male", ]  
+# eraldame kõik read, kus sugu == 2 (Mees) ning salvestame selle uueks objektiks
+mehed <- andmed[andmed$sugu == "2", ]
 
 # moodustame kaks filtritunnust ja kombineerime need alagrupi valikuks
-filter_kod <- andmed$CIT == "Not a citizen of the U.S."  # mittekodanikud
-filter_vanus <- andmed$AGEP >= 80                        # vähemalt 80 aastased
-alamandmestik <- andmed[filter_kod & filter_vanus, ]   # Ära unusta: [read, veerud]
+filter_tervis <- andmed$tervis == "väga hea"  # väga hea tervisega
+filter_vanus <- andmed$vanus >= 23                        # vähemalt 23 aastased
+alamandmestik <- andmed[filter_tervis & filter_vanus, ]   # Ära unusta: [read, veerud]
 ```
 
 
-Üks näide ka tõeväärtusvektori abil veergude eraldamise kohta: valime kõik need veerud, mille päis algab sõnega *MAR* (tunnused, mis seotud abieluga)
-```{r,eval=FALSE}
-onMAR <- startsWith(names(andmed), "MAR")
-# või 
-#onMAR <- substr(names(andmed), 1, 3) == "MAR"
-abielu <- andmed[, onMAR]
-str(abielu)
-```
 
+### Ülesanded
 
-### Ülesanded (Massachusettsi andmestik)
-1. Selekteeri andmestikust iga 5. rida ja salvesta see alamandmestik uue nimega `valik5`. Mitu vaatlust on selles andmestikus?
+1. Moodusta alamandmestik, kuhu kuuluvad uuritavad, kellel puudub vererõhu mõõtmistulemus (tunnus `SVR` - süstoolne vererõhk).
 
-1. Moodusta alamandmestik, kuhu kuuluvad uuritavad, kelle kohta pole teada, kas nad on viimase aasta jooksul elukohta vahetanud. Kes sellesse andmestikku kuuluvad?
-
-```{r, eval=FALSE, include=FALSE}
-valik5 <- andmed[seq(1, nrow(andmed), 5), ]
-str(valik5);dim(valik5)
-
-vastamata_kolimine <- andmed[is.na(andmed$MIG), ]
-str(vastamata_kolimine)
-
-```
 
 
 

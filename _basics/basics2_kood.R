@@ -4,9 +4,9 @@
 
 # --- 1. Väärtuste tüübid ----
 
-kaalud <- c(7, 3.5, 0.4, 2, 3.2, 20.2)
-liik <- c("koer", "kass", "rott", "kass", "kass", "koer")
-vanused <- c(7, NA, 3, 53, 53, 95)
+kaalud <- c(73, 85, 92.3, 62, 103.2, 70.2)
+nimed <- c("Liisa", "Margus", "Mati", "Maria", "Tauno", "Heleri")
+vanused <- c(37, NA, 23, 53, 53, 45)
 
 # Kontrollimem väärtuste tüüpe
 is.integer(kaalud)
@@ -16,44 +16,41 @@ class(liik)
 class(vanused)
 is.na(vanused)
 
-# ---- ÜL 1.0.1 ----
+# Eraldi käsk on ka puuduvate väärtuste esinemise kontrolliks:
+is.na(vanused)
+anyNA(vanused)
+
+
+
+# ---- ÜL 1.1.1 ----
 
 # 1.  
-month.name
 x <- c(0:5, "tekst", "T", 234.5, "234,5")
 x
 
 # Kas on sõned?
-is.character(____)
-is.character(____)
+is.character(x)
 
 # Proovi arvuks teisendada: as.numeric()
-as.numeric(____) 
-as.numeric(____)
-
+as.numeric(x) 
 
 
 # 2.
-# Miks on tulemused erinevad?
-is.integer(1:4)
-is.integer(c(1, 2, 3))
-
-
-# 3.
 # Kas tulemus on oodatav?
 z <- c("a", "NA", NA, 0)
 is.na(z)
 
 
+
  
-# --- 1.1 Tõeväärtused ja tõeväärtusvektorid ----
+# --- 1.2 Tõeväärtused ja tõeväärtusvektorid ----
 
 # Tõeväärtusvektori tekitamiseks piisab vektori kontrollimist mõne väärtusega
-kaalud > 10
+kaalud > 80
 vanused == 53
-liik == "kass"
+nimed == "Mati"
 vanused == kaalud
-liik == "kass" | liik == "koer"
+nimed == "Mati" | nimed == "Maria"
 
 # Kui soovime mingit väärtust võrrelda NA-ga, siis järgnev kahjuks ei tööta
 vanused == NA
@@ -71,35 +68,12 @@ is.na(vanused) * 1
 sum(is.na(vanused))
 
 
-# ---- ÜL 1.1.1 ----
+# ---- ÜL 1.2.1 ----
+
 # 1.
-x <- c(__, __, __, __, __)
-x
-as.numeric(x)
-# Mis sai NA-st?
-
-# 2.
-?as.logical
-# Kontrolli
-nr <- c(-3, -1/3, 0, 1, 2, Inf, -Inf, NA, NaN, 1:4)
-as.logical(nr)
-
-
-# 3.  
-NA | FALSE
-NA | TRUE
-
-NA & FALSE
-NA & TRUE
-
-!NA 
-
-
-# 4.
 as.integer(c("tere", 0, 1, TRUE, FALSE)) 
 as.integer(c(        0, 1, TRUE, FALSE))
 # Miks on tulemused erinevad?
-
 
 # LISA
 
@@ -117,60 +91,33 @@ as.logical(tekst)
 
 # --- 2. Andmestik, andmete import ----
 
-# --- 2.1 Andmete sisselugemine ja faili kirjutamine (tekstifail) ----
+# Proovi Import DataSet võimalusi RStudios.
 
-# Töökataloogi paika seadmine
+
+
+# --- 2.1 Töökausta seadistamine ----
+
+# Töökausta paika seadmine
 # Windowsis kaustade struktuuri tähistamiseks kasutada tagurpidi kaldkriipsu "\" (backward slash),
 # kuid R-is on sellel oma tähendus, seega tuleb kasutada "\\"
-setwd("C:\\Users\\mina\\Rkursus\\")
+setwd("C:\\Users\\mina\\Rkoolitus\\")
 
 # Aga võib kasutada ka tavalist kaldkriipsu "/" (forward slash)
-setwd("C:/Users/mina/Rkursus/")
+setwd("C:/Users/mina/Rkoolitus/")
 
 # RStudios saab töökataloogi ka automaatselt seada käesoleva skripti asukoha järgi
-# vt. faili "RStudio snipetid"   
 
-# Näide andmete sisselugemisest
-näide1 <- read.table("https://github.com/Rkursus/2020/raw/master/data/esimene.txt",
-                     header = T, sep = "\t", dec = ",")
+#install.packages('rstudioapi')
+setwd(dirname(rstudioapi::getActiveDocumentContext()[[2]]))
 
-# Tulemused saab kirjutada faili käsuga write.table()
-write.table(näide1, "failinimi.txt", sep = "\t")
-
-
-
-# --- ÜL 2.1.1 ----
-
-# 1.
-?read.table
-
-
-# 2. 
-tab1 <- read.table("https://github.com/Rkursus/2020/raw/master/data/____", ____)
-
-tab2 <- read.table("https://github.com/Rkursus/2020/raw/master/data/____", ____)
-
-tab3 <- read.table("https://github.com/Rkursus/2020/raw/master/data/____", ____)
-
-tab4 <- read.table("https://github.com/Rkursus/2020/raw/master/data/____", ____)
-
-tab1;tab2;tab3;tab4
-
- 
-
-# 3.
-andmed <- read.table(____)
-
-# ülevaate saamine andmstikust, kontroll
-str(andmed)
-
-
-
-
+# Tulemused saab kirjutada faili käsuga write.csv2()
+write.csv2(näide1, "failinimi.txt", row.names = F)
 
 
 
 # --- 2.2 Esmase ülevaate saamine andmetabelist ----
+
+load(url("https://github.com/Rkursus/kantaremor/raw/main/data/andmed.RData"))
 str(andmed)
 summary(andmed)
 dim(andmed)
@@ -181,80 +128,59 @@ head(andmed)
 
 
 
+# --- 3. Toimingud andmestikuga ----
 
 
+# --- 3.1 Veergude ja ridade eraldamine andmestikust: indeksi ja nime järgi ----
 
-# --- 2.3 Lisapakettide kasutamine ----
-install.packages("readxl")
-install.packages("haven")
-# pakett  readxl -  MS Excel'i failide importimiseks
-# pakett  haven -   SAS, SPSS, Stata failide impordiks(ka neisse formaatidesse salvestamiseks)
+# Andmestikus ainult ühe veeru uurimiseks kasutame dollari-sümbolit
+vanused <- andmed$vanus
+median(andmed$vanus)
+median(vanused)
 
-# lisapaketi aktiveerimine
-library(readxl)
+# data.frame on kahemõõtmeline tabel, seega iga elemendi asukoht on määratud rea ja veeru numbriga
+# Rea- ja veerunumbrite abil andmestikust infot eraldades tuleb kasutada kantsulgusid:
 
+andmed[3, 2] # kolmas rida, teine veerg
+andmed[ , 2] # kogu teine veerg
+andmed[3, ] # kogu kolmas rida
 
+# Korraga on võimalik eraldada ka mitut rida või veergu, kasutades selleks käsku c(.):
 
-# --- 2.4 Andmete import programmide MS Excel, SAS, Stata, SPSS failidest ----
+andmed[, c(2, 4)] # teine ja neljas veerg
+valik <- c(2, 4) # tekitame objekti, milles on kirjas huvipakkuvate veergude numbrid
+andmed[, valik] # kasutame seda objekti andmestikust veergude eraldamiseks
+andmed[c(5, 3, 9), ] # viies, kolmas ja üheksas rida
 
-# --- 2.4.1 MS Excel failid (.xls, .xlsx) ----
-
-# salvesta MS Exceli fail "tudengite-arv.xlsx" aadressilt https://github.com/Rkursus/2020/tree/master/data oma töökausta
-
-list.files()   # vaata, mis nimega failid on töökaustas
-excel_sheets("tudengite-arv.xlsx")   # töölehtede nimed MS Exceli failis
-AY <- read_excel("tudengite-arv.xlsx", sheet = "avatud ylikool")   # importimine
-# AY <- read_excel("tudengite-arv.xlsx", sheet = 2)  # sama, töölehe nime asemel järjekorranumber
-str(AY)  # vaata tulemust
-
-
-# MS Exceli andmetabel ei pruugi alata kohe esimesest tabelireast (argument 'skip'):
-tabel <- read_excel("tudengite-arv.xlsx", sheet = "tabel", skip = 2)
-str(tabel)
+# Tihti on veeruindeksite asemel mugavam kasutada veergude nimesid (peavad olema jutumärkides):
+andmed[, c("vanus", "pikkus")]  # eraldame veerud "vanus" ja "pikkus"
 
 
 
 
-# ---  2.4.2 SAS, SPSS, Stata failide imoport ----
+# --- 3.2 Uue tunnuse lisamine ----
 
-# salvesta aadressilt https://github.com/Rkursus/2020/tree/master/data oma töökausta failid:
-# "effort.sas7bdat"  - SAS andmefail
-# "effort.dta" - Stata fail
-# "effort.sav" - SPSS fail  
-
-
-# vajaliku lisapaketi aktiveerimine
-library(haven)
-
-# andmestike import
-andmestik_SAS <- read_sas("effort.sas7bdat")
-andmestik_Stata <-  read_stata("effort.dta")
-andmestik_SPSS <- read_spss("effort.sav")
-
-# imporditud andmestike ülevaatamine
-str(andmestik_SAS)
-str(andmestik_Stata)
-str(andmestik_SPSS)
-
-# nii SAS, SPSS kui ka Stata andmestikes saab tunnusenimedele lisada nn silte(ik label), 
-# need on näha kui avada andmestikud RStudio tabelivaates, näiteks
-View(andmestik_SAS)
+# Uue tunnuse lisamiseks tuleb valida uus tunnuse nimi ja omistada väärtused
+andmed$pikkus_meetrites <- andmed$pikkus/100
+str(andmed)
 
 
-# NB!
-# antud paketis on olemas ka käsud R-i andmetabelite ekspordiks SAS, SPSS, Stata andmefailiks
-# käsud write_<...> ei pruugi siiski olla 100% töökindlad!
-# näiteks write_sas() käsu tulemust uuem SAS omaks ei tunnista 
- 
+# --- 3.4 Veergude ja ridade eraldamine andmestikust: tõeväärtusvektori abil ----
 
-# ---- ÜL 2.4.3 ----
-# 1.
-# vaata esmalt abifaili
-?read_excel
+# eraldame kõik read, kus sugu == 2 (Mees) ning salvestame selle uueks objektiks
+mehed <- andmed[andmed$sugu == "2", ]
 
-# NB! imporditaval töölehel pole veergudel päist, kuidas need ette anda?
-kokku <- read_excel(____)
-str(kokku)
+# moodustame kaks filtritunnust ja kombineerime need alagrupi valikuks
+filter_tervis <- andmed$tervis == "väga hea"              # väga hea tervisega
+filter_vanus <- andmed$vanus >= 23                        # vähemalt 23 aastased
+alamandmestik <- andmed[filter_tervis & filter_vanus, ]   # Ära unusta: [read, veerud]
+
+# ---- ÜL 3.3.1 ----
+
+# Moodusta alamandmestik, kuhu kuuluvad uuritavad, kellel puudub vererõhu mõõtmistulemus 
+#  (tunnus `SVR` - süstoolne vererõhk)
+alamandmestik <- andmed[_____,______]
+
 
 
 
