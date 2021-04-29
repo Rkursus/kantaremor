@@ -1,5 +1,5 @@
 # --- Rakendustarkvara R
-# --- II praktikum ----
+# --- II osa ----
 
 
 # --- 1. Väärtuste tüübid ----
